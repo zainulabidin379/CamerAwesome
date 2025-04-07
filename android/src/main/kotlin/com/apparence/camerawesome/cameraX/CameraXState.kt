@@ -63,7 +63,7 @@ data class CameraXState(
             if (previewCamera == null && concurrentCamera == null) {
                 throw Exception("Trying to access main camera control before setting the preview")
             }
-            return previewCamera?.cameraControl ?: concurrentCamera?.c cameras?.first()?.cameraControl!!
+            return previewCamera?.cameraControl ?: concurrentCamera?.cameras?.first()?.cameraControl!!
         }
 
     val maxZoomRatio: Double
@@ -209,7 +209,6 @@ data class CameraXState(
         }
     }
 
-    // Rest of the file remains unchanged (methods like buildVideoCapture, surfaceProvider, etc.)
     private fun buildVideoCapture(videoOptions: AndroidVideoOptions?): VideoCapture<Recorder> {
         val recorderBuilder = Recorder.Builder()
         if (videoRecordingQuality != null) {

@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 class AwesomeCameraModeSelector extends StatelessWidget {
   final CameraState state;
-  final String? photoModeText;
-  final String? videoModeText;
+  final String photoModeText;
+  final String videoModeText;
 
   const AwesomeCameraModeSelector({
     super.key,
@@ -28,6 +28,8 @@ class AwesomeCameraModeSelector extends StatelessWidget {
       content = CameraModePager(
         initialMode: state.captureMode,
         availableModes: state.saveConfig!.captureModes,
+        photoModeText: photoModeText,
+        videoModeText: videoModeText,
         onChangeCameraRequest: (mode) {
           state.setState(mode);
         },
@@ -48,12 +50,16 @@ class CameraModePager extends StatefulWidget {
 
   final List<CaptureMode> availableModes;
   final CaptureMode? initialMode;
+  final String photoModeText;
+  final String videoModeText;
 
   const CameraModePager({
     super.key,
     required this.onChangeCameraRequest,
     required this.availableModes,
     required this.initialMode,
+    required this.photoModeText,
+    required this.videoModeText,
   });
 
   @override
@@ -68,11 +74,8 @@ class _CameraModePagerState extends State<CameraModePager> {
   @override
   void initState() {
     super.initState();
-    _index = widget.initialMode != null
-        ? widget.availableModes.indexOf(widget.initialMode!)
-        : 0;
-    _pageController =
-        PageController(viewportFraction: 0.25, initialPage: _index);
+    _index = widget.initialMode != null ? widget.availableModes.indexOf(widget.initialMode!) : 0;
+    _pageController = PageController(viewportFraction: 0.25, initialPage: _index);
   }
 
   @override
@@ -112,9 +115,7 @@ class _CameraModePagerState extends State<CameraModePager> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         child: Text(
-                          cameraMode.name == CaptureMode.photo
-                              ? widget.photoModeText ?? "PHOTO"
-                              : widget.videoModeText ?? "VIDEO",
+                          cameraMode.name == CaptureMode.photo.toString() ? widget.photoModeText : widget.videoModeText,
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

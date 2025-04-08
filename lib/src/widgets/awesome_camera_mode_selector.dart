@@ -6,10 +6,14 @@ import 'package:flutter/material.dart';
 
 class AwesomeCameraModeSelector extends StatelessWidget {
   final CameraState state;
+  final String? photoModeText;
+  final String? videoModeText;
 
   const AwesomeCameraModeSelector({
     super.key,
     required this.state,
+    this.photoModeText = "PHOTO",
+    this.videoModeText = "VIDEO",
   });
 
   @override
@@ -108,7 +112,9 @@ class _CameraModePagerState extends State<CameraModePager> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         child: Text(
-                          cameraMode.name.toUpperCase(),
+                          cameraMode.name == CaptureMode.photo
+                              ? widget.photoModeText ?? "PHOTO"
+                              : widget.videoModeText ?? "VIDEO",
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

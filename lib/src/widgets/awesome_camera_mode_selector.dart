@@ -115,7 +115,7 @@ class _CameraModePagerState extends State<CameraModePager> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         child: Text(
-                          cameraMode.name == CaptureMode.photo.toString() ? widget.photoModeText : widget.videoModeText,
+                          cameraMode.name.toUpperCase() == CaptureMode.photo.toString().toUpperCase() ? widget.photoModeText : widget.videoModeText,
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
